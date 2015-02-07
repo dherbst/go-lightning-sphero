@@ -16,7 +16,24 @@ func main() {
 	spheroDriver.SetRGB(255, 200, 100)
 	color := true
 	work := func() {
-		gobot.Every(2*time.Second, func() {
+		// go in a square
+		spheroDriver.SetRGB(12, 245, 245)
+		spheroDriver.Roll(50, uint16(0))
+		time.Sleep(5 * time.Second)
+
+		spheroDriver.SetRGB(98, 12, 245)
+		spheroDriver.Roll(50, uint16(90))
+		time.Sleep(5 * time.Second)
+
+		spheroDriver.SetRGB(0, 0, 0)
+		spheroDriver.Roll(50, uint16(180))
+		time.Sleep(5 * time.Second)
+
+		spheroDriver.SetRGB(100, 28, 65)
+		spheroDriver.Roll(50, uint16(270))
+		time.Sleep(5 * time.Second)
+
+		gobot.Every(1*time.Second, func() {
 			color = !color
 			if color {
 				spheroDriver.SetRGB(200, 200, 0)
@@ -25,6 +42,9 @@ func main() {
 				spheroDriver.SetRGB(20, 200, 100)
 				fmt.Printf("20,200,100\n")
 			}
+			direction := uint16(gobot.Rand(360))
+			fmt.Printf("direction=%v\n", direction)
+			spheroDriver.Roll(80, direction)
 		})
 	}
 
