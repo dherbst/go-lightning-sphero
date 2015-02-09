@@ -24,3 +24,4 @@ _testmain.go
 *.prof
 *~
 CREDENTIALS
+twittercreds.yaml
