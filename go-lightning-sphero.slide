@@ -1,0 +1,56 @@
+GoLangPhilly - Twitter and Sphero together
+Changing colors by tweeting at your sphero
+10 Feb 2015
+Tags: golang, twitter, sphero, gobot.io
+
+Darrel Herbst
+DramaFever
+dherbst@gmail.com
+http://github.com/dherbst
+@darrelherbst
+
+* GoLangPhilly - Twitter and Sphero together
+This lightning talk explains how I hooked up twitter and the sphero to change colors.
+
+.image arch.png
+
+I wanted to be able to tweet RGB or a color at @golangphilbot and have it change that color.
+
+* Steps
+
+1. Get a sphero, pair it with osx.
+2. Grab the sphero driver
+
+   	"github.com/hybridgroup/gobot"
+	"github.com/hybridgroup/gobot/platforms/sphero"
+
+3. Grab a Twitter library and get your mentions
+
+	"github.com/ChimeraCoder/anaconda"
+
+4. Parse the tweet, and set the colors on the sphero
+
+		q <- &MyColor{uint8(ru),uint8(gu),uint8(bu)}
+
+                c := <-queue
+			fmt.Printf("robot setting color %v,%v,%v\n", c.R, c.G, c.B)
+			SetColor(c.R, c.G, c.B)
+
+* Where's the code?
+
+  https://github.com/dherbst/go-lightning-sphero
+
+You can tweet @golangphilbot
+
+  @golangphilbot 200,200,50
+  @golangphilbot red
+
+I only mapped these colors
+
+	colorMap = map[string]string{
+		"blue":  "0,0,255",
+		"red":   "255,0,0",
+		"green": "0,255,0",
+		"white": "255,255,255",
+		"black": "0,0,0",
+	}
