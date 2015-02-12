@@ -35,3 +35,23 @@ func TestFindFirstWordNotMention(t *testing.T) {
 		t.FailNow()
 	}
 }
+
+func TestBadWord(t *testing.T) {
+	tweet := "@golangphilbot 150"
+
+	rgb := reRGB.FindStringSubmatch(tweet)
+	if rgb != nil {
+		t.FailNow()
+	}
+
+	result := FindFirstWord(tweet)
+	if result == "" {
+		t.Log("Expected 150 but got %v", result)
+		t.FailNow()
+	}
+
+	value := colorMap[result]
+	if value != "" {
+		t.FailNow()
+	}
+}

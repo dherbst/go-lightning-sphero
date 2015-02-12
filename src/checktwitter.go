@@ -146,6 +146,10 @@ func ProcessTweet(q chan *MyColor, tweet string) {
 		if word != "" {
 			fmt.Printf("twitter Using the word %v\n", word)
 			rgb := colorMap[word]
+			if rgb == "" {
+				fmt.Printf("twitter Did not get rgb from %v\n", word)
+				return
+			}
 			parts := strings.Split(rgb, ",")
 			r, g, b := parts[0], parts[1], parts[2]
 			ru, _ := strconv.ParseUint(r, 10, 8)
@@ -168,7 +172,7 @@ func main() {
 	var q = make(chan *MyColor)
 	go initBot(q)
 	fmt.Printf("Sleeping 10 seconds to init the robot\n")
-	time.Sleep(time.Second * 10)
+	time.Sleep(time.Second * 5)
 	fmt.Printf("awake!")
 
 	creds, err := ReadCredentials("twittercreds.yaml")
@@ -210,6 +214,6 @@ func main() {
 			}
 		}
 
-		time.Sleep(time.Second * 5)
+		time.Sleep(time.Second * 62)
 	}
 }
